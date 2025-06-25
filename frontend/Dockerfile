@@ -6,6 +6,8 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 
+COPY . .
+
 # Build the production-optimized React app
 RUN npm run build
 
