@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as a parent image
-FROM node:20-alpine
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
@@ -11,13 +11,10 @@ COPY . .
 # Build the production-optimized React app
 RUN npm run build
 
-# Install serve to serve the build directory
-RUN npm install -g serve
-
-# Copy only the build output for a smaller image
-FROM node:20-alpine as production
+# Production stage
+FROM node:20-alpine AS production
 WORKDIR /app
-COPY --from=0 /app/build ./build
+COPY --from=builder /app/build ./build
 RUN npm install -g serve
 EXPOSE 3000
 CMD ["serve", "-s", "build", "-l", "3000"]
