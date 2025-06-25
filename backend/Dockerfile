@@ -12,6 +12,9 @@ COPY Pipfile Pipfile.lock ./
 # Install dependencies
 RUN pipenv install --deploy --ignore-pipfile
 
+# Install requests and fpdf for integration testing
+RUN pip install requests fpdf
+
 # Copy the rest of the code
 COPY . .
 

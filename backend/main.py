@@ -119,3 +119,17 @@ def link_to_audio(link: str = Form(...)):
         return {"audio_file": audio_filename}
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
+
+@app.post("/text-to-audio/")
+def text_to_audio(text: str = Form(...)):
+    try:
+        text_content = text.strip()
+        if not text_content:
+            return JSONResponse(status_code=400, content={"error": "No text provided."})
+        audio_filename = f"text_{uuid.uuid4().hex[:8]}.mp3"
+        audio_file_path = os.path.join(AUDIO_DIR, audio_filename)
+        tts = gTTS(text=text_content, lang='en', tld='com')
+        tts.save(audio_file_path)
+        return {"audio_file": audio_filename}
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
