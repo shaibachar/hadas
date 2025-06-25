@@ -1,0 +1,19 @@
+# Pipenv configuration for FastAPI backend
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+
+[packages]
+fastapi = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+python-multipart = "*"
+pillow = "*"
+pytesseract = "*"
+pymupdf = "*"
+gtts = "*"
+
+[requires]
+python_version = "3.11"

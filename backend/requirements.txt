@@ -1,0 +1,2 @@
+# FastAPI backend dependencies
+pipenv install fastapi uvicorn[standard] python-multipart pillow pytesseract pymupdf gtts
