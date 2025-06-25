@@ -11,7 +11,8 @@ services:
     depends_on:
       - frontend
     command: >
-      sh -c "which sleep && sleep 1 && echo OK"
+      sh -c "pipenv run uvicorn main:app --host 0.0.0.0 --port 8080 --reload & \
+      /usr/bin/sleep 10 && pipenv run python test_integration.py && fg"
 
   frontend:
     build:
