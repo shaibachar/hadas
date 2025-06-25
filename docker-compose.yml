@@ -6,8 +6,6 @@ services:
       context: ./backend
     env_file:
       - ./backend/.env.prod
-    volumes:
-      - ./backend:/app
     ports:
       - "8080:8080"
     depends_on:
