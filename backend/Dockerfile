@@ -16,7 +16,7 @@ RUN pipenv install --deploy --ignore-pipfile
 COPY . .
 
 # Expose port
-EXPOSE 8000
+EXPOSE 8080
 
 # Command to run the app
-CMD ["pipenv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["pipenv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]

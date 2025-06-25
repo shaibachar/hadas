@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000";
+
 function App() {
   const [link, setLink] = useState("");
   const [audioUrl, setAudioUrl] = useState("");
@@ -14,13 +16,13 @@ function App() {
     try {
       const formData = new FormData();
       formData.append('link', link);
-      const res = await fetch("http://localhost:8000/link-to-audio/", {
+      const res = await fetch(`${API_BASE_URL}/link-to-audio/`, {
         method: "POST",
         body: formData
       });
       const data = await res.json();
       if (res.ok && data.audio_file) {
-        setAudioUrl(`http://localhost:8000/audio/${data.audio_file}`);
+        setAudioUrl(`${API_BASE_URL}/audio/${data.audio_file}`);
       } else {
         setError(data.error || "Failed to generate audio.");
       }

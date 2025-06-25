@@ -13,8 +13,8 @@ cd "$(dirname "$0")/backend"
 echo "[Backend] Installing Python dependencies with pipenv..."
 pipenv --python "$PYTHON_BIN" install --dev
 
-echo "[Backend] Starting FastAPI server on http://localhost:8000 ..."
-pipenv run uvicorn main:app --host 0.0.0.0 --port 8000 &
+echo "[Backend] Starting FastAPI server on http://localhost:8080 ..."
+pipenv run uvicorn main:app --host 0.0.0.0 --port 8080 &
 BACKEND_PID=$!
 
 # Start frontend

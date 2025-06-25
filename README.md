@@ -13,7 +13,7 @@ This is a full-stack project with a FastAPI backend and a ReactJS frontend. Both
    ```bash
    docker-compose up --build
    ```
-2. Backend: http://localhost:8000
+2. Backend: http://localhost:8080
 3. Frontend: http://localhost:3000
 
 ## Development
