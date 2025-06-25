@@ -24,17 +24,28 @@ function App() {
     resetOutputs();
     try {
       if (mode === "link") {
-        const formData = new FormData();
-        formData.append('link', link);
-        const res = await fetch(`${API_BASE_URL}/link-to-audio/`, {
-          method: "POST",
-          body: formData
-        });
-        const data = await res.json();
-        if (res.ok && data.audio_file) {
-          setAudioUrl(`${API_BASE_URL}/audio/${data.audio_file}`);
-        } else {
-          setError(data.error || "Failed to generate audio.");
+        try {
+          const formData = new FormData();
+          formData.append('link', link);
+          const res = await fetch(`${API_BASE_URL}/link-to-audio/`, {
+            method: "POST",
+            body: formData
+          });
+          let data;
+          try {
+            data = await res.json();
+          } catch {
+            setError("Server error: could not parse response.");
+            setLoading(false);
+            return;
+          }
+          if (res.ok && data.audio_file) {
+            setAudioUrl(`${API_BASE_URL}/audio/${data.audio_file}`);
+          } else {
+            setError(data?.error || `Error: ${res.status} ${res.statusText}`);
+          }
+        } catch (err) {
+          setError("Error: " + err.message);
         }
       } else if (mode === "pdf") {
         if (!pdfFile) {
