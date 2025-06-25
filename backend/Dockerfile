@@ -15,6 +15,9 @@ RUN pipenv install --deploy --ignore-pipfile
 # Install requests and fpdf for integration testing
 RUN pip install requests fpdf
 
+# Install coreutils (for sleep) in the backend Docker image
+RUN apt-get update && apt-get install -y coreutils && rm -rf /var/lib/apt/lists/*
+
 # Copy the rest of the code
 COPY . .
 
