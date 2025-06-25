@@ -5,7 +5,7 @@ services:
     build:
       context: ./backend
     env_file:
-      - ./backend/.env.dev
+      - ./backend/.env.prod
     volumes:
       - ./backend:/app
     ports:
@@ -17,7 +17,7 @@ services:
     build:
       context: ./frontend
     env_file:
-      - ./frontend/.env.dev
+      - ./frontend/.env.prod
     volumes:
       - ./frontend:/app
     ports:
